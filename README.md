@@ -20,7 +20,7 @@ A seguir estão os passos sugeridos para a preparação do seu grupo no início 
 
 # Projeto: *<Sistemas_de_Faltas>*
 
-# Grupo: *<LGJV>*
+# Grupo: *<L_GJV>*
 
 # Descrição
 
