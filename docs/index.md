@@ -3,19 +3,25 @@
 
 
 <font size="+12"><center>
-*&lt;Nome do Projeto&gt;*
+*&lt;Sistema LGJV&gt;*
 </center></font>
 
->*Observação 1: A estrutura inicial deste documento é só um exemplo. O seu grupo deverá alterar esta estrutura de acordo com o que está sendo solicitado na disciplina.*
 
->*Observação 2: O índice abaixo não precisa ser editado se você utilizar o Visual Studio Code com a extensão **Markdown All in One**. Essa extensão atualiza o índice automaticamente quando o arquivo é salvo.*
 
 **Conteúdo**
 
 - [Autores](#autores)ahjasb
 - [Descrição do projeto](#descrição-do-projeto)
+- Um projeto de sistema de controle de faltas tem como objetivo principal auxiliar instituições de ensino no registro e controle da frequência dos alunos em aulas e atividades escolares. O sistema deve permitir que os professores e responsáveis possam registrar as faltas dos alunos, incluindo informações sobre a data, horário e motivo da ausência.
 - [Diagrama de casos de uso](#diagrama-de-casos-de-uso)
+![Caso de Uso](https://user-images.githubusercontent.com/100170755/220771904-bcc959ec-b779-464f-bf37-63fad16b0a01.png)
 - [Descrição dos casos de uso](#descrição-dos-casos-de-uso)
+Registrar Falta: Permite aos professores ou responsáveis registrar faltas de alunos em uma determinada disciplina ou curso.
+Consultar Faltas: Permite aos professores, responsáveis ou alunos visualizar informações sobre as faltas registradas, como datas, motivos e número total de faltas acumuladas.
+Editar Falta: Permite aos professores ou responsáveis editar informações sobre uma falta registrada anteriormente, como a data ou motivo da ausência.
+Excluir Falta: Permite aos professores ou responsáveis excluir uma falta registrada anteriormente.
+
+
 - [Protótipos de tela](#protótipos-de-tela)
 - [Modelo de domínio](#modelo-de-domínio)
 - [Decisões de arquitetura](#decisões-de-arquitetura)
