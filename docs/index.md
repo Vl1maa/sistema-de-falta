@@ -53,6 +53,7 @@ Excluir Falta: Permite aos professores ou responsáveis excluir uma falta regist
 # Protótipos de tela
 
 *![Prototipo](https://user-images.githubusercontent.com/100170755/220773601-93b44381-1024-4012-a4fc-2e32e2e85c4f.png)*
+*![pt2](https://user-images.githubusercontent.com/100170755/220774153-834ef2e1-be61-41f3-bdfd-349b8922922d.png)*
 
 # Modelo de domínio
 
