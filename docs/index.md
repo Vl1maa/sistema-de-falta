@@ -10,16 +10,12 @@
 
 **Conteúdo**
 
-- [Autores](#autores)Gabriel, João Pedro, Vinicius Lima
+- [Autores](#autores)
 - [Descrição do projeto](#descrição-do-projeto)
-- Um projeto de sistema de controle de faltas tem como objetivo principal auxiliar instituições de ensino no registro e controle da frequência dos alunos em aulas e atividades escolares. O sistema deve permitir que os professores e responsáveis possam registrar as faltas dos alunos, incluindo informações sobre a data, horário e motivo da ausência.
+
 - [Diagrama de casos de uso](#diagrama-de-casos-de-uso)
-![Caso de Uso](https://user-images.githubusercontent.com/100170755/220771904-bcc959ec-b779-464f-bf37-63fad16b0a01.png)
 - [Descrição dos casos de uso](#descrição-dos-casos-de-uso)
-Registrar Falta: Permite aos professores ou responsáveis registrar faltas de alunos em uma determinada disciplina ou curso.
-Consultar Faltas: Permite aos professores, responsáveis ou alunos visualizar informações sobre as faltas registradas, como datas, motivos e número total de faltas acumuladas.
-Editar Falta: Permite aos professores ou responsáveis editar informações sobre uma falta registrada anteriormente, como a data ou motivo da ausência.
-Excluir Falta: Permite aos professores ou responsáveis excluir uma falta registrada anteriormente.
+
 
 
 - [Protótipos de tela](#protótipos-de-tela)
@@ -31,31 +27,32 @@ Excluir Falta: Permite aos professores ou responsáveis excluir uma falta regist
 
 # Autores
 
-* Aluno 1
-* Aluno 2
-* Aluno 3
-* Aluno 4
-* Aluno 5
-* Aluno 6
-* Aluno 7
-* Aluno 8
-
+* Gabriel Gimenez
+* Joao Pedro
+* Vinicius Lima
+* Lucca
 
 # Descrição do projeto
 
-*&lt;Descrição do projeto&gt;*
+
+
+*Um projeto de sistema de controle de faltas tem como objetivo principal auxiliar instituições de ensino no registro e controle da frequência dos alunos em aulas e atividades escolares. O sistema deve permitir que os professores e responsáveis possam registrar as faltas dos alunos, incluindo informações sobre a data, horário e motivo da ausência.*
+
 
 # Diagrama de casos de uso
 
-*&lt;Diagrama de casos de uso&gt;*
+![Caso de Uso](https://user-images.githubusercontent.com/100170755/220771904-bcc959ec-b779-464f-bf37-63fad16b0a01.png)*
 
 # Descrição dos casos de uso
 
-*&lt;Descrição dos casos de uso&gt;*
+*Registrar Falta: Permite aos professores ou responsáveis registrar faltas de alunos em uma determinada disciplina ou curso.
+Consultar Faltas: Permite aos professores, responsáveis ou alunos visualizar informações sobre as faltas registradas, como datas, motivos e número total de faltas acumuladas.
+Editar Falta: Permite aos professores ou responsáveis editar informações sobre uma falta registrada anteriormente, como a data ou motivo da ausência.
+Excluir Falta: Permite aos professores ou responsáveis excluir uma falta registrada anteriormente.*
 
 # Protótipos de tela
 
-*&lt;Protótipos de tela&gt;*
+*![Prototipo](https://user-images.githubusercontent.com/100170755/220773601-93b44381-1024-4012-a4fc-2e32e2e85c4f.png)*
 
 # Modelo de domínio
 
