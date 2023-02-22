@@ -10,7 +10,7 @@
 
 **Conteúdo**
 
-- [Autores](#autores)ahjasb
+- [Autores](#autores)Gabriel, João Pedro, Vinicius Lima
 - [Descrição do projeto](#descrição-do-projeto)
 - Um projeto de sistema de controle de faltas tem como objetivo principal auxiliar instituições de ensino no registro e controle da frequência dos alunos em aulas e atividades escolares. O sistema deve permitir que os professores e responsáveis possam registrar as faltas dos alunos, incluindo informações sobre a data, horário e motivo da ausência.
 - [Diagrama de casos de uso](#diagrama-de-casos-de-uso)
