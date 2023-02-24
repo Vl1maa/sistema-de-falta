@@ -57,7 +57,7 @@ Excluir Falta: Permite aos professores ou responsáveis excluir uma falta regist
 
 # Modelo de domínio
 
-*&lt;Modelo de domínio&gt;*
+*![Dominio](https://user-images.githubusercontent.com/100170755/221247494-563cc0e8-833d-4b1a-9ec8-c051aa13f862.png)*
 
 # Decisões de arquitetura
 
