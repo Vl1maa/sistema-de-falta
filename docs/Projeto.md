@@ -3,7 +3,7 @@
 
 
 <font size="+12"><center>
-*&lt;Sistema LGJV&gt;*
+*Sistema LGJV*
 </center></font>
 
 
