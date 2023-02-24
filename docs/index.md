@@ -61,7 +61,11 @@ Excluir Falta: Permite aos professores ou responsáveis excluir uma falta regist
 
 # Decisões de arquitetura
 
-*&lt;Decisões de arquitetura&gt;*
+* A arquitetura para o sistema de controle de faltas pode ser a arquitetura em três camadas (apresentação, negócio e dados), na qual a camada de apresentação é responsável pela interface do usuário, a camada de negócio pela lógica de negócio do sistema e a camada de dados pelo armazenamento e recuperação dos dados do sistema.*
+
+
+![Arquitetura](https://user-images.githubusercontent.com/100170755/221261944-670d5623-f71a-4bcb-a5b6-f6a427906fce.png)
+
 
 # Diagrama de implantação
 
