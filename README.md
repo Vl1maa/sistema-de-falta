@@ -3,17 +3,21 @@
 
 
 
-# Projeto: *<Sistemas_de_Faltas>*
+# Projeto: *Sistema de Controle de Faltas*
 
-# Grupo: *<L_G_J_V>*
+# Grupo: 
+- Gabriel
+- Joao Pedro
+- Lucca
+- Viinicius Lima
 
 # Descrição
 
-*<Descrição_resumida_do_projeto>*
+*Um projeto de sistema de controle de faltas tem como objetivo principal auxiliar instituições de ensino no registro e controle da frequência dos alunos em aulas e atividades escolares. O sistema deve permitir que os professores e responsáveis possam registrar as faltas dos alunos, incluindo informações sobre a data, horário e motivo da ausência.*
 
 # Documentação
 
-Os arquivos da documentação deste projeto estão na pasta [/docs](/docs), e o seu conteúdo é publicado em **https://&lt;usuario&gt;.github.io/ppads-2023s1**.
+*Os arquivos da documentação deste projeto estão na pasta [/docs](/docs).*
 
 
 # Releases
