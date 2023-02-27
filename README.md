@@ -9,7 +9,7 @@
 - Gabriel
 - Joao Pedro
 - Lucca
-- Viinicius Lima
+- Vinicius Lima
 
 # Descrição
 
