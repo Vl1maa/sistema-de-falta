@@ -73,4 +73,5 @@ Excluir Falta: Permite aos professores ou responsáveis excluir uma falta regist
 
 # Referências
 
-*&lt;Lista de referências&gt;*
+https://www.lucidchart.com/pages/pt/diagrama-de-caso-de-uso-uml
+https://www.ic.unicamp.br/~ariadne/mc436/1s2017/Lar10ModDom.pdf
