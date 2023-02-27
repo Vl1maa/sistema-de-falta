@@ -12,12 +12,8 @@
 
 - [Autores](#autores)
 - [Descrição do projeto](#descrição-do-projeto)
-
 - [Diagrama de casos de uso](#diagrama-de-casos-de-uso)
 - [Descrição dos casos de uso](#descrição-dos-casos-de-uso)
-
-
-
 - [Protótipos de tela](#protótipos-de-tela)
 - [Modelo de domínio](#modelo-de-domínio)
 - [Decisões de arquitetura](#decisões-de-arquitetura)
