@@ -17,7 +17,7 @@
 
 # Documentação
 
-*Os arquivos da documentação deste projeto estão na pasta [/DOC1](/docs).*
+*Os arquivos da documentação deste projeto estão na pasta [/DOC1](/DOC1).*
 
 
 # Releases
