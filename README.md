@@ -22,4 +22,6 @@
 
 # Releases
 
-Deverá ser publicado um release ao término de cada entrega do projeto.
+[/DOC1](/DOC1)
+
+
