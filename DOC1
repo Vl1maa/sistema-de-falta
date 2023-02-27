@@ -1,0 +1,1 @@
+*Os arquivos da documentação deste projeto estão na pasta [/docs](/docs).*
