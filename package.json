@@ -1,0 +1,23 @@
+{
+  "name": "sistema-de-falta",
+  "version": "1.0.0",
+  "description": "<h2><a href= \"https://www.mackenzie.br\">Universidade Presbiteriana Mackenzie</a></h2> <h3><a href= \"https://www.mackenzie.br/graduacao/sao-paulo-higienopolis/sistemas-de-informacao\">Sistemas de Informação</a></h3>",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vl1maa/sistema-de-falta.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vl1maa/sistema-de-falta/issues"
+  },
+  "homepage": "https://github.com/Vl1maa/sistema-de-falta#readme"
+}
