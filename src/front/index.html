@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+  </head>
+  <body class="bg-gray-100">
+    <div class="min-h-screen flex items-center justify-center p-8">
+      <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
+        <h1 class="text-2xl font-semibold mb-4">Faça Login</h1>
+        <form id="form-login">
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="email">
+              Usuário
+            </label>
+            <input
+              class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="input-username"
+              type="text"
+              placeholder="Digite seu nome de usuário"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2" for="password">
+              Senha
+            </label>
+            <input
+              class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="input-password"
+              type="password"
+              placeholder="Digite sua senha"
+              required
+            />
+          </div>
+          <div class="flex items-center justify-between">
+            <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Entrar
+            </button>
+            <a
+              class="inline-block align-baseline font-medium text-sm text-blue-500 hover:text-blue-800"
+            >
+              Esqueceu sua senha?
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script src="./services/api.js"></script>
+  <script src="./services/local-storage.js"></script>
+  <script>
+    const formLoginElement = document.getElementById("form-login");
+    const inputUsuario = document.getElementById("input-username");
+    const inputSenha = document.getElementById("input-password");
+
+    formLoginElement.addEventListener("submit", fazerLogin);
+
+    async function fazerLogin(e) {
+      e.preventDefault();
+      const dados = {
+        usuario: inputUsuario.value,
+        senha: inputSenha.value,
+      };
+      const data = await $post("/login", dados);
+      if (data.statusCode != 200) {
+        alert(data.body);
+        return;
+      }
+      $salvar("usuario-logado", {
+        usuario: data.body,
+      });
+      window.location.href = "/dashboard";
+    }
+  </script>
+</html>

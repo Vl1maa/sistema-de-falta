@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <header class="bg-gray-800 py-4">
+      <nav class="flex justify-between items-center px-8 max-w-7xl mx-auto">
+        <a href="#" class="text-white text-lg font-semibold"
+          >Sistema de falta</a
+        >
+        <ul class="flex space-x-4 items-center">
+          <li>
+            <a
+              href="/dashboard"
+              class="text-gray-300 hover:text-white font-medium"
+              >Início</a
+            >
+          </li>
+          <li>
+            <a
+              href="/dashboard/professor/"
+              class="text-gray-300 hover:text-white font-medium"
+              >Gerenciar professor</a
+            >
+          </li>
+          <li>
+            <a
+              href="/dashboard/aluno/"
+              class="text-gray-300 hover:text-white font-medium"
+              >Gerenciar aluno</a
+            >
+          </li>
+          <li>
+            <a
+              href="/dashboard/materia/"
+              class="text-gray-300 hover:text-white font-medium"
+              >Gerenciar matéria</a
+            >
+          </li>
+          <li>
+            <a
+              href="/dashboard/turma/"
+              class="text-gray-300 hover:text-white font-medium"
+              >Gerenciar turma</a
+            >
+          </li>
+          <button class="py-2 px-6 bg-red-500 text-white rounded-md">
+            Sair
+          </button>
+        </ul>
+      </nav>
+    </header>
+    <div class="w-full max-w-7xl px-8 mx-auto mt-10">
+      <h2 class="text-2xl font-semibold mb-6">Criar novo aluno</h2>
+      <form>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="nome">
+            Aluno
+          </label>
+          <input
+            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="input-nome-aluno"
+            type="text"
+            placeholder="Digite o nome do aluno"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="nome">
+            Email do responsável:
+          </label>
+          <input
+            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="input-email-responsavel"
+            type="text"
+            placeholder="Digite o e-mail do responsável"
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="nome">
+            Turma
+          </label>
+          <select
+            id="select-turma"
+            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          ></select>
+        </div>
+        <div class="flex items-center justify-between">
+          <button
+            id="btn-form-aluno"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="button"
+          >
+            Enviar
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="w-full max-w-7xl px-8 mx-auto mt-10">
+      <h2 class="text-2xl font-semibold mb-6">Alunos</h2>
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Aluno
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Turma
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Email do responsável
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Editar
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Excluir
+            </th>
+          </tr>
+        </thead>
+        <tbody id="tb-alunos"></tbody>
+      </table>
+    </div>
+  </body>
+  <script src="../../services/api.js"></script>
+  <script>
+    const inputNomeAluno = document.getElementById("input-nome-aluno");
+    const inputEmailResponsavel = document.getElementById(
+      "input-email-responsavel"
+    );
+    const selectTurma = document.getElementById("select-turma");
+    const btnFormAlunos = document.getElementById("btn-form-aluno");
+
+    btnFormAlunos.addEventListener("click", criarAluno);
+
+    async function criarAluno(e) {
+      e.preventDefault();
+      const dados = {
+        nome: inputNomeProfessor.value,
+        emailResponsavel: inputEmailResponsavel.value,
+        turma: selectTurma.value,
+      };
+      try {
+        const data = await $post("/aluno", dados);
+        await resgataTodosAlunos();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    async function resgataTodosAlunos() {
+      try {
+        tabelaProfessorElement.innerHTML = "";
+        const data = await $get("/aluno");
+        for (let aluno of data.body) {
+          tabelaProfessorElement.innerHTML += `<tr>
+            <td
+              class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+            >
+              ${aluno.nome}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              ${aluno.turma}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              ${aluno.emailResponsavel}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer">
+              Editar
+            </td>
+            <td id="${aluno.id}" onclick="deletaProfessor(this.id)" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer">
+              Excluir
+            </td>
+          </tr>`;
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    (async () => {
+      await resgataTodosAlunos();
+    })();
+  </script>
+</html>

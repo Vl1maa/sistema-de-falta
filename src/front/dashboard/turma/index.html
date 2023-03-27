@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <header class="bg-gray-800 py-4">
+      <nav class="flex justify-between items-center px-8 max-w-7xl mx-auto">
+        <a href="#" class="text-white text-lg font-semibold"
+          >Sistema de falta</a
+        >
+        <ul class="flex space-x-4 items-center">
+          <li>
+            <a
+              href="/dashboard"
+              class="text-gray-300 hover:text-white font-medium"
+              >Início</a
+            >
+          </li>
+          <li>
+            <a
+              href="/dashboard/professor/"
+              class="text-gray-300 hover:text-white font-medium"
+              >Gerenciar professor</a
+            >
+          </li>
+          <li>
+            <a
+              href="/dashboard/aluno/"
+              class="text-gray-300 hover:text-white font-medium"
+              >Gerenciar aluno</a
+            >
+          </li>
+          <li>
+            <a
+              href="/dashboard/materia/"
+              class="text-gray-300 hover:text-white font-medium"
+              >Gerenciar matéria</a
+            >
+          </li>
+          <li>
+            <a
+              href="/dashboard/turma/"
+              class="text-gray-300 hover:text-white font-medium"
+              >Gerenciar turma</a
+            >
+          </li>
+          <button class="py-2 px-6 bg-red-500 text-white rounded-md">
+            Sair
+          </button>
+        </ul>
+      </nav>
+    </header>
+    <div class="w-full max-w-7xl px-8 mx-auto mt-10">
+      <h2 class="text-2xl font-semibold mb-6">Criar nova turma</h2>
+      <form>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="nome">
+            Turma
+          </label>
+          <input
+            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="input-nome-materia"
+            type="text"
+            placeholder="Digite o nome da turma"
+          />
+        </div>
+        <div class="flex items-center justify-between">
+          <button
+            id="btn-form-materia"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="button"
+          >
+            Enviar
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="w-full max-w-7xl px-8 mx-auto mt-10">
+      <h2 class="text-2xl font-semibold mb-6">Turmas</h2>
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Turma
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Editar
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Excluir
+            </th>
+          </tr>
+        </thead>
+        <tbody id="tb-turma"></tbody>
+      </table>
+    </div>
+  </body>
+  <script src="../../services/api.js"></script>
+  <script></script>
+</html>

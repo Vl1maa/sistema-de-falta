@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+  </head>
+  <body class="bg-gray-100">
+    <header class="bg-gray-800 py-4">
+      <nav class="flex justify-between items-center px-8 max-w-7xl mx-auto">
+        <a href="#" class="text-white text-lg font-semibold"
+          >Sistema de falta</a
+        >
+        <ul class="flex space-x-4 items-center">
+          <li>
+            <a
+              href="/dashboard"
+              class="text-gray-300 hover:text-white font-medium"
+              >Início</a
+            >
+          </li>
+          <li>
+            <a
+              href="/dashboard/professor/"
+              class="text-gray-300 hover:text-white font-medium"
+              >Gerenciar professor</a
+            >
+          </li>
+          <li>
+            <a
+              href="/dashboard/aluno/"
+              class="text-gray-300 hover:text-white font-medium"
+              >Gerenciar aluno</a
+            >
+          </li>
+          <li>
+            <a
+              href="/dashboard/materia/"
+              class="text-gray-300 hover:text-white font-medium"
+              >Gerenciar matéria</a
+            >
+          </li>
+          <li>
+            <a
+              href="/dashboard/turma/"
+              class="text-gray-300 hover:text-white font-medium"
+              >Gerenciar turma</a
+            >
+          </li>
+          <button class="py-2 px-6 bg-red-500 text-white rounded-md">
+            Sair
+          </button>
+        </ul>
+      </nav>
+    </header>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+      <div class="container mx-auto my-4">
+        <h1 class="text-2xl font-bold mb-4">Registro de Faltas</h1>
+        <table class="table-auto border w-full">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="px-4 py-2">Nome</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-alunos"></tbody>
+        </table>
+        <div class="w-full py-4 flex justify-end">
+          <button
+            onclick=""
+            class="px-6 py-2 bg-green-500 rounded-md text-white"
+          >
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script src="../services/api.js"></script>
+
+  <script>
+    const tabelaAlunos = document.getElementById("tabela-alunos");
+
+    async function resgataAlunos() {
+      let alunos = await $get("/aluno");
+      alunos.body.forEach((aluno) => {
+        tabelaAlunos.innerHTML += `<tr onclick="selecionarAluno(this.id)" id="aluno-${aluno.id}">
+          <td class="border px-4 py-2 text-center hover:bg-red-500 hover:text-white cursor-pointer">${aluno.nome}</td>
+        </tr>`;
+        const alunoElementId = "aluno-" + aluno.id;
+        const elementByAlunoId = document.getElementById(alunoElementId);
+      });
+    }
+
+    function selecionarAluno(idElementoAluno) {
+      let elementoAluno = document.getElementById(idElementoAluno);
+      let isAlunoSelecionado =
+        elementoAluno.classList.contains("aluno-selecionado");
+      if (isAlunoSelecionado) {
+        elementoAluno.classList.remove("bg-red-500");
+        elementoAluno.classList.remove("text-white");
+        elementoAluno.classList.remove("aluno-selecionado");
+      } else {
+        elementoAluno.classList.add("bg-red-500");
+        elementoAluno.classList.add("text-white");
+        elementoAluno.classList.add("aluno-selecionado");
+      }
+    }
+
+    (async () => {
+      await resgataAlunos();
+    })();
+  </script>
+</html>
