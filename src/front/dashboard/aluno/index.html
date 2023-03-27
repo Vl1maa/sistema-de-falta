@@ -158,13 +158,14 @@
     );
     const selectTurma = document.getElementById("select-turma");
     const btnFormAlunos = document.getElementById("btn-form-aluno");
+    const tabelaAlunos = document.getElementById("tb-alunos")
 
     btnFormAlunos.addEventListener("click", criarAluno);
 
     async function criarAluno(e) {
       e.preventDefault();
       const dados = {
-        nome: inputNomeProfessor.value,
+        nome: inputNomeAluno.value,
         emailResponsavel: inputEmailResponsavel.value,
         turma: selectTurma.value,
       };
@@ -178,10 +179,10 @@
 
     async function resgataTodosAlunos() {
       try {
-        tabelaProfessorElement.innerHTML = "";
+        tabelaAlunos .innerHTML = "";
         const data = await $get("/aluno");
         for (let aluno of data.body) {
-          tabelaProfessorElement.innerHTML += `<tr>
+          tabelaAlunos .innerHTML += `<tr>
             <td
               class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
             >
