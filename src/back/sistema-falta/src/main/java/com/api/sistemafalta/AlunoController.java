@@ -70,6 +70,63 @@ public class AlunoController {
         }
     }
 
+    @GetMapping(value = "/aluno/{idTurma}")
+    public ResponseEntity<Response> listaAlunosPorTurma(@PathVariable Integer idTurma) {
+        try {
+            String query = "SELECT a.*, t.descricao as turma_descricao FROM aluno a INNER JOIN turma t on (t.id = a.id_turma) WHERE id_turma = :idTurma;";
+            MapSqlParameterSource params = new MapSqlParameterSource();
+            params.addValue("idTurma", idTurma);
+            List<Aluno> alunos = jdbcTemplate.query(query, params, rs -> {
+                List<Aluno> alunosTemp = new ArrayList<Aluno>();
+                while (rs.next()) {
+                    Aluno a = new Aluno();
+                    Turma t = new Turma();
+                    a.setId(rs.getInt("id"));
+                    a.setNome(rs.getString("nome"));
+                    a.setEmailResponsavel(rs.getString("email_responsavel"));
+                    t.setId(rs.getInt("id_turma"));
+                    t.setDescricao(rs.getString("turma_descricao"));
+                    a.setTurma(t);
+                    alunosTemp.add(a);
+                }
+                return alunosTemp;
+            });
+            Response response = new Response(alunos, HttpStatus.OK.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        } catch (Exception e) {
+            Response response = new Response(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        }
+    }
+
+    @GetMapping(value = "/aluno/one/{idAluno}")
+    public ResponseEntity<Response> resgataPorId(@PathVariable Integer idAluno) {
+        try {
+            String query = "SELECT a.*, t.descricao as turma_descricao FROM aluno a INNER JOIN turma t on (t.id = a.id_turma) WHERE a.id = :idAluno;";
+            MapSqlParameterSource params = new MapSqlParameterSource();
+            params.addValue("idAluno", idAluno);
+            Aluno aluno = jdbcTemplate.query(query, params, rs -> {
+                if (rs.next()) {
+                    Aluno a = new Aluno();
+                    Turma t = new Turma();
+                    a.setId(rs.getInt("id"));
+                    a.setNome(rs.getString("nome"));
+                    a.setEmailResponsavel(rs.getString("email_responsavel"));
+                    t.setId(rs.getInt("id_turma"));
+                    t.setDescricao(rs.getString("turma_descricao"));
+                    a.setTurma(t);
+                    return a;
+                }
+                return null;
+            });
+            Response response = new Response(aluno, HttpStatus.OK.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        } catch (Exception e) {
+            Response response = new Response(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        }
+    }
+
     @DeleteMapping("/aluno/{idAluno}")
     public ResponseEntity<Response> deletar(@PathVariable Integer idAluno) {
         try {

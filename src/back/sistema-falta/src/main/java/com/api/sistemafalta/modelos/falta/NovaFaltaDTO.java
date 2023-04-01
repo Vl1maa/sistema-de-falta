@@ -1,17 +1,8 @@
 package com.api.sistemafalta.modelos.falta;
 
 public class NovaFaltaDTO {
-    private String data;
     private Integer idAluno;
-    private Integer idAula;
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
+    private Integer idMateria;
 
     public Integer getIdAluno() {
         return idAluno;
@@ -21,12 +12,16 @@ public class NovaFaltaDTO {
         this.idAluno = idAluno;
     }
 
-    public Integer getIdAula() {
-        return idAula;
+    public Integer getIdMateria() {
+        return idMateria;
     }
 
-    public void setIdAula(Integer idAula) {
-        this.idAula = idAula;
+    public void setIdMateria(Integer idMateria) {
+        this.idMateria = idMateria;
     }
 
+    @Override
+    public String toString() {
+        return "NovaFaltaDTO [idAluno=" + idAluno + ", idMateria=" + idMateria + "]";
+    }
 }
