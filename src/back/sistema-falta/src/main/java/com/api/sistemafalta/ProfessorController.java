@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.sistemafalta.modelos.materia.Materia;
 import com.api.sistemafalta.modelos.professor.NovoProfessorDTO;
 import com.api.sistemafalta.modelos.professor.Professor;
+import com.api.sistemafalta.modelos.turma.Turma;
 
 @RestController()
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -30,10 +31,11 @@ public class ProfessorController {
     @PostMapping(value = "/professor")
     public ResponseEntity<Response> novo(@RequestBody NovoProfessorDTO professor) {
         try {
-            String query = "INSERT INTO professor (nome, id_materia) VALUES (:nome, :idMateria);";
+            String query = "INSERT INTO professor (nome, id_materia, id_turma) VALUES (:nome, :idMateria, :idTurma);";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("nome", professor.getNome());
             params.addValue("idMateria", professor.getIdMateria());
+            params.addValue("idTurma", professor.getIdTurma());
             jdbcTemplate.update(query, params);
             Response response = new Response("Professor cadastrado com sucesso!", HttpStatus.CREATED.value());
             return ResponseEntity.status(response.getStatusCode()).body(response);
@@ -46,17 +48,21 @@ public class ProfessorController {
     @GetMapping("/professor")
     public ResponseEntity<Response> listar() {
         try {
-            String query = "SELECT p.*, m.descricao as materia_descricao FROM professor p INNER JOIN materia m on (m.id = p.id_materia);";
+            String query = "SELECT p.*, m.descricao as materia_descricao, t.descricao as turma_descricao FROM professor p INNER JOIN turma t on (t.id = p.id_turma) INNER JOIN materia m on (m.id = p.id_materia);";
             List<Professor> professoresListados = jdbcTemplate.query(query, rs -> {
                 List<Professor> professores = new ArrayList<Professor>();
                 while (rs.next()) {
                     Professor p = new Professor();
                     Materia m = new Materia();
+                    Turma t = new Turma();
                     p.setId(rs.getInt("id"));
                     p.setNome(rs.getString("nome"));
                     m.setId(rs.getInt("id_materia"));
                     m.setDescricao(rs.getString("materia_descricao"));
+                    t.setId(rs.getInt("id_turma"));
+                    t.setDescricao(rs.getString("turma_descricao"));
                     p.setMateria(m);
+                    p.setTurma(t);
                     professores.add(p);
                 }
                 return professores;

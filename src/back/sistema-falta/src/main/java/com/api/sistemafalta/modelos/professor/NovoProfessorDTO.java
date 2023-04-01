@@ -3,6 +3,7 @@ package com.api.sistemafalta.modelos.professor;
 public class NovoProfessorDTO {
     private String nome;
     private Integer idMateria;
+    private Integer idTurma;
 
     public String getNome() {
         return nome;
@@ -18,5 +19,13 @@ public class NovoProfessorDTO {
 
     public void setIdMateria(Integer idMateria) {
         this.idMateria = idMateria;
+    }
+
+    public Integer getIdTurma() {
+        return idTurma;
+    }
+
+    public void setIdTurma(Integer idTurma) {
+        this.idTurma = idTurma;
     }
 }

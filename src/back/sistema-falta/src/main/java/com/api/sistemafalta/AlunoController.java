@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.sistemafalta.modelos.aluno.Aluno;
 import com.api.sistemafalta.modelos.aluno.NovoAlunoDTO;
+import com.api.sistemafalta.modelos.turma.Turma;
 
 @RestController()
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -28,10 +29,10 @@ public class AlunoController {
     @PostMapping(value = "/aluno")
     public ResponseEntity<Response> novo(@RequestBody NovoAlunoDTO aluno) {
         try {
-            String query = "INSERT INTO aluno (nome, turma, email_responsavel) VALUES (:nome, :turma, :emailResponsavel);";
+            String query = "INSERT INTO aluno (nome, id_turma, email_responsavel) VALUES (:nome, :idTurma, :emailResponsavel);";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("nome", aluno.getNome());
-            params.addValue("turma", aluno.getTurma());
+            params.addValue("idTurma", aluno.getIdTurma());
             params.addValue("emailResponsavel", aluno.getEmailResponsavel());
             jdbcTemplate.update(query, params);
             Response response = new Response("Aluno cadastrado com sucesso!", HttpStatus.CREATED.value());
@@ -45,15 +46,18 @@ public class AlunoController {
     @GetMapping(value = "/aluno")
     public ResponseEntity<Response> lista() {
         try {
-            String query = "SELECT * FROM aluno;";
+            String query = "SELECT a.*, t.descricao as turma_descricao FROM aluno a INNER JOIN turma t on (t.id = a.id_turma);";
             List<Aluno> alunos = jdbcTemplate.query(query, rs -> {
                 List<Aluno> alunosTemp = new ArrayList<Aluno>();
                 while (rs.next()) {
                     Aluno a = new Aluno();
+                    Turma t = new Turma();
                     a.setId(rs.getInt("id"));
                     a.setNome(rs.getString("nome"));
                     a.setEmailResponsavel(rs.getString("email_responsavel"));
-                    a.setTurma(rs.getString("turma"));
+                    t.setId(rs.getInt("id_turma"));
+                    t.setDescricao(rs.getString("turma_descricao"));
+                    a.setTurma(t);
                     alunosTemp.add(a);
                 }
                 return alunosTemp;

@@ -1,9 +1,11 @@
 package com.api.sistemafalta.modelos.aluno;
 
+import com.api.sistemafalta.modelos.turma.Turma;
+
 public class Aluno {
     private Integer id;
     private String nome;
-    private String turma;
+    private Turma turma;
     private String emailResponsavel;
 
     public Integer getId() {
@@ -22,11 +24,11 @@ public class Aluno {
         this.nome = nome;
     }
 
-    public String getTurma() {
+    public Turma getTurma() {
         return turma;
     }
 
-    public void setTurma(String turma) {
+    public void setTurma(Turma turma) {
         this.turma = turma;
     }
 

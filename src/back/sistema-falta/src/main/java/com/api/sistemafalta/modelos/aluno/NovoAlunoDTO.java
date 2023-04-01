@@ -2,7 +2,7 @@ package com.api.sistemafalta.modelos.aluno;
 
 public class NovoAlunoDTO {
     private String nome;
-    private String turma;
+    private Integer idTurma;
     private String emailResponsavel;
 
     public String getNome() {
@@ -13,12 +13,12 @@ public class NovoAlunoDTO {
         this.nome = nome;
     }
 
-    public String getTurma() {
-        return turma;
+    public Integer getIdTurma() {
+        return idTurma;
     }
 
-    public void setTurma(String turma) {
-        this.turma = turma;
+    public void setIdTurma(Integer idTurma) {
+        this.idTurma = idTurma;
     }
 
     public String getEmailResponsavel() {
@@ -27,5 +27,10 @@ public class NovoAlunoDTO {
 
     public void setEmailResponsavel(String emailResponsavel) {
         this.emailResponsavel = emailResponsavel;
+    }
+
+    @Override
+    public String toString() {
+        return "NovoAlunoDTO [nome=" + nome + ", idTurma=" + idTurma + ", emailResponsavel=" + emailResponsavel + "]";
     }
 }
