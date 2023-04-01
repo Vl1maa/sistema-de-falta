@@ -165,7 +165,7 @@
       const dados = {
         nome: inputNomeAluno.value,
         emailResponsavel: inputEmailResponsavel.value,
-        turma: selectTurma.value,
+        idTurma: selectTurma.value,
       };
       try {
         const data = await $post("/aluno", dados);
@@ -181,7 +181,7 @@
         const data = await $get("/turma");
         for (let turma of data.body) {
           selectTurma.innerHTML += `<tr>
-            <option value="${turma.descricao}">
+            <option value="${turma.id}">
               ${turma.descricao}
             </option>
           </tr>`;
@@ -212,7 +212,7 @@
               ${aluno.nome}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              ${aluno.turma}
+              ${aluno.turma.descricao}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
               ${aluno.emailResponsavel}

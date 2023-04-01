@@ -58,6 +58,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
       <div class="container mx-auto my-4">
         <h1 class="text-2xl font-bold mb-4">Registro de Faltas</h1>
+        <
         <table class="table-auto border w-full">
           <thead>
             <tr class="bg-gray-100">
@@ -82,6 +83,7 @@
 
   <script>
     const tabelaAlunos = document.getElementById("tabela-alunos");
+    let listaAlunosFalta = [];
 
     async function resgataAlunos() {
       let alunos = await $get("/aluno");
@@ -95,14 +97,23 @@
     }
 
     function selecionarAluno(idElementoAluno) {
+      let idAluno = idElementoAluno.split("aluno-")[1];
       let elementoAluno = document.getElementById(idElementoAluno);
       let isAlunoSelecionado =
         elementoAluno.classList.contains("aluno-selecionado");
       if (isAlunoSelecionado) {
+        tempList = [];
+        listaAlunosFalta.forEach((idAlunoAtual) => {
+          if (idAlunoAtual != idAluno) {
+            tempList.push(idAlunoAtual);
+          }
+        });
         elementoAluno.classList.remove("bg-red-500");
         elementoAluno.classList.remove("text-white");
         elementoAluno.classList.remove("aluno-selecionado");
+        listaAlunosFalta = tempList;
       } else {
+        listaAlunosFalta.push(idAluno);
         elementoAluno.classList.add("bg-red-500");
         elementoAluno.classList.add("text-white");
         elementoAluno.classList.add("aluno-selecionado");

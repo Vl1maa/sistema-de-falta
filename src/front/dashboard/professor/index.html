@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -86,6 +85,15 @@
             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           ></select>
         </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-bold mb-2" for="materia">
+            Turma
+          </label>
+          <select
+            id="select-turmas"
+            class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          ></select>
+        </div>
         <div class="flex items-center justify-between">
           <button
             id="btn-form-professor"
@@ -118,6 +126,12 @@
               scope="col"
               class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
+              Turma
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
               Editar
             </th>
             <th
@@ -140,6 +154,7 @@
     const btnFrmProfessorElement =
       document.getElementById("btn-form-professor");
     const selectMaterias = document.getElementById("select-materias");
+    const selectTurmas = document.getElementById("select-turmas");
     const tableProfessoresElement = document.getElementById("tb-professores");
     const inputNomeProfessor = document.getElementById("input-nome");
 
@@ -150,6 +165,7 @@
       const dados = {
         nome: inputNomeProfessor.value,
         idMateria: selectMaterias.value,
+        idTurma: selectTurmas.value,
       };
       try {
         const data = await $post("/professor", dados);
@@ -172,6 +188,9 @@
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
               ${professor.materia.descricao}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              ${professor.turma.descricao}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer">
               Editar
@@ -206,9 +225,21 @@
       }
     }
 
+    async function resgataTodasTurmas() {
+      try {
+        const data = await $get("/turma");
+        for (let turma of data.body) {
+          selectTurmas.innerHTML += `<option id="${turma.id}" value="${turma.id}">${turma.descricao}</option>`;
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     (async () => {
       await resgataTodosProfessores();
       await resgataTodasMaterias();
+      await resgataTodasTurmas();
     })();
   </script>
 </html>
