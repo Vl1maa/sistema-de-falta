@@ -94,9 +94,7 @@
           <select
             id="select-turma"
             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          >
-            <option value="1">1 ANO</option>
-          </select>
+          ></select>
         </div>
         <div class="flex items-center justify-between">
           <button
@@ -158,7 +156,7 @@
     );
     const selectTurma = document.getElementById("select-turma");
     const btnFormAlunos = document.getElementById("btn-form-aluno");
-    const tabelaAlunos = document.getElementById("tb-alunos")
+    const tabelaAlunos = document.getElementById("tb-alunos");
 
     btnFormAlunos.addEventListener("click", criarAluno);
 
@@ -177,12 +175,37 @@
       }
     }
 
+    async function resgataTodasTurmas() {
+      try {
+        selectTurma.innerHTML = "";
+        const data = await $get("/turma");
+        for (let turma of data.body) {
+          selectTurma.innerHTML += `<tr>
+            <option value="${turma.descricao}">
+              ${turma.descricao}
+            </option>
+          </tr>`;
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    async function deletaAluno(id) {
+      try {
+        const data = await $delete("/aluno/" + id);
+        await resgataTodosAlunos();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     async function resgataTodosAlunos() {
       try {
-        tabelaAlunos .innerHTML = "";
+        tabelaAlunos.innerHTML = "";
         const data = await $get("/aluno");
         for (let aluno of data.body) {
-          tabelaAlunos .innerHTML += `<tr>
+          tabelaAlunos.innerHTML += `<tr>
             <td
               class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
             >
@@ -197,7 +220,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer">
               Editar
             </td>
-            <td id="${aluno.id}" onclick="deletaProfessor(this.id)" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer">
+            <td id="${aluno.id}" onclick="deletaAluno(this.id)" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer">
               Excluir
             </td>
           </tr>`;
@@ -209,6 +232,7 @@
 
     (async () => {
       await resgataTodosAlunos();
+      await resgataTodasTurmas();
     })();
   </script>
 </html>

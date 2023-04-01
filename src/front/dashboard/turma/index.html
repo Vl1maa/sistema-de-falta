@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -72,14 +71,14 @@
           </label>
           <input
             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="input-nome-materia"
+            id="input-nome-turma"
             type="text"
             placeholder="Digite o nome da turma"
           />
         </div>
         <div class="flex items-center justify-between">
           <button
-            id="btn-form-materia"
+            id="btn-form-turma"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="button"
           >
@@ -118,5 +117,62 @@
     </div>
   </body>
   <script src="../../services/api.js"></script>
-  <script></script>
+  <script>
+    const formNovoProfessorElement = document.getElementById(
+      "form-novo-professor"
+    );
+    const btnFrmTurmaElement = document.getElementById("btn-form-turma");
+    const tableTurmaElement = document.getElementById("tb-turma");
+    const inputNomeTurma = document.getElementById("input-nome-turma");
+
+    btnFrmTurmaElement.addEventListener("click", criarTurma);
+
+    async function criarTurma(e) {
+      e.preventDefault();
+      const dados = {
+        descricao: inputNomeTurma.value,
+      };
+      try {
+        const data = await $post("/turma", dados);
+        await resgataTodasTurmas();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    async function resgataTodasTurmas() {
+      try {
+        tableTurmaElement.innerHTML = "";
+        const data = await $get("/turma");
+        for (let turma of data.body) {
+          tableTurmaElement.innerHTML += `<tr>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              ${turma.descricao}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer">
+              Editar
+            </td>
+            <td id="${turma.id}" onclick="deletaTurma(this.id)" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 cursor-pointer">
+              Excluir
+            </td>
+          </tr>`;
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    async function deletaTurma(id) {
+      try {
+        const data = await $delete("/turma/" + id);
+        await resgataTodasTurmas();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    (async () => {
+      await resgataTodasTurmas();
+    })();
+  </script>
 </html>
