@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,6 +62,21 @@ public class AlunoController {
             return ResponseEntity.status(response.getStatusCode()).body(response);
         } catch (Exception e) {
             Response response = new Response(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        }
+    }
+
+    @DeleteMapping("/aluno/{idAluno}")
+    public ResponseEntity<Response> deletar(@PathVariable Integer idAluno) {
+        try {
+            String query = "DELETE FROM aluno WHERE id = :idAluno;";
+            MapSqlParameterSource params = new MapSqlParameterSource();
+            params.addValue("idAluno", idAluno);
+            jdbcTemplate.update(query, params);
+            Response response = new Response("Aluno excluído.", HttpStatus.OK.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        } catch (Exception e) {
+            Response response = new Response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.status(response.getStatusCode()).body(response);
         }
     }
