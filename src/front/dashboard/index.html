@@ -58,7 +58,41 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
       <div class="container mx-auto my-4">
         <h1 class="text-2xl font-bold mb-4">Registro de Faltas</h1>
-        <
+        <div class="w-full gap-4 justify-between my-4">
+          <h3>Escolha nos filtros</h3>
+          <div class="grid w-full gap-4 grid-cols-2">
+            <div>
+              <label class="block text-gray-700 font-bold" for="select-turmas">
+                Turma
+              </label>
+              <select
+                id="select-turmas"
+                onchange="resgataAlunos()"
+                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="default" disabled selected>
+                  Selecione uma turma
+                </option>
+              </select>
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-bold"
+                for="select-professores"
+              >
+                Professor
+              </label>
+              <select
+                id="select-professores"
+                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="default" disabled selected>
+                  Selecione um professor
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
         <table class="table-auto border w-full">
           <thead>
             <tr class="bg-gray-100">
@@ -69,7 +103,7 @@
         </table>
         <div class="w-full py-4 flex justify-end">
           <button
-            onclick=""
+            id="btn-salva-faltas"
             class="px-6 py-2 bg-green-500 rounded-md text-white"
           >
             Salvar
@@ -83,17 +117,18 @@
 
   <script>
     const tabelaAlunos = document.getElementById("tabela-alunos");
+    const selectTurmas = document.getElementById("select-turmas");
+    const btnSalvaFaltas = document.getElementById("btn-salva-faltas");
+    const selectProfessores = document.getElementById("select-professores");
     let listaAlunosFalta = [];
+    let listaAlunos = [];
+
+    btnSalvaFaltas.addEventListener("click", salvaFaltas);
 
     async function resgataAlunos() {
-      let alunos = await $get("/aluno");
-      alunos.body.forEach((aluno) => {
-        tabelaAlunos.innerHTML += `<tr onclick="selecionarAluno(this.id)" id="aluno-${aluno.id}">
-          <td class="border px-4 py-2 text-center hover:bg-red-500 hover:text-white cursor-pointer">${aluno.nome}</td>
-        </tr>`;
-        const alunoElementId = "aluno-" + aluno.id;
-        const elementByAlunoId = document.getElementById(alunoElementId);
-      });
+      let alunos = await $get("/aluno/" + selectTurmas.value);
+      listaAlunos = alunos.body;
+      exibeAlunos();
     }
 
     function selecionarAluno(idElementoAluno) {
@@ -120,8 +155,53 @@
       }
     }
 
+    async function resgataTodasProfessores() {
+      try {
+        const data = await $get("/professor");
+        for (let professor of data.body) {
+          selectProfessores.innerHTML += `<option id="${professor.id}" value="${professor.materia.id}">${professor.nome}</option>`;
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    async function resgataTodasTurmas() {
+      try {
+        const data = await $get("/turma");
+        for (let turma of data.body) {
+          selectTurmas.innerHTML += `<option id="${turma.id}" value="${turma.id}">${turma.descricao}</option>`;
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    function exibeAlunos() {
+      tabelaAlunos.innerHTML = "";
+      listaAlunos.forEach((aluno) => {
+        tabelaAlunos.innerHTML += `<tr onclick="selecionarAluno(this.id)" id="aluno-${aluno.id}">
+          <td class="border px-4 py-2 text-center hover:bg-red-500 hover:text-white cursor-pointer">${aluno.nome}</td>
+        </tr>`;
+        const alunoElementId = "aluno-" + aluno.id;
+        const elementByAlunoId = document.getElementById(alunoElementId);
+      });
+    }
+
+    function salvaFaltas() {
+      listaAlunosFalta.forEach(async (idAluno) => {
+        const data = {
+          idAluno,
+          idMateria: selectProfessores.value,
+        };
+
+        await $post("/falta/registra-falta", data);
+      });
+    }
+
     (async () => {
-      await resgataAlunos();
+      await resgataTodasTurmas();
+      await resgataTodasProfessores();
     })();
   </script>
 </html>
