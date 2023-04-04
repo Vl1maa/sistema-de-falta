@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,6 +59,21 @@ public class TurmaController {
             return ResponseEntity.status(response.getStatusCode()).body(response);
         } catch (Exception e) {
             Response response = new Response(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        }
+    }
+
+    @DeleteMapping("/turma/{idTurma}")
+    public ResponseEntity<Response> deletar(@PathVariable Integer idTurma) {
+        try {
+            String query = "DELETE FROM turma WHERE id = :idTurma;";
+            MapSqlParameterSource params = new MapSqlParameterSource();
+            params.addValue("idTurma", idTurma);
+            jdbcTemplate.update(query, params);
+            Response response = new Response("Professor excluído.", HttpStatus.OK.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        } catch (Exception e) {
+            Response response = new Response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
             return ResponseEntity.status(response.getStatusCode()).body(response);
         }
     }
