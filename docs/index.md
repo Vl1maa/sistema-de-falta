@@ -75,9 +75,6 @@ Ferramentas de relatórios: as ferramentas de relatórios permitem que os profes
 ![Arquitetura](https://user-images.githubusercontent.com/100170755/221261944-670d5623-f71a-4bcb-a5b6-f6a427906fce.png)
 
 
-# Diagrama de implantação
-
-*&lt;Diagrama de implantação&gt;*
 
 # Referências
 
