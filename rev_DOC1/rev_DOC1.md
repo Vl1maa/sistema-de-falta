@@ -50,12 +50,17 @@ Excluir Falta: Permite aos professores ou responsáveis excluir uma falta regist
 
 # Protótipos de tela
 
-*![Prototipo](https://user-images.githubusercontent.com/100170755/220773601-93b44381-1024-4012-a4fc-2e32e2e85c4f.png)*
-*![pt2](https://user-images.githubusercontent.com/100170755/220774153-834ef2e1-be61-41f3-bdfd-349b8922922d.png)*
+![WhatsApp Image 2023-04-29 at 00 28 17 (1)](https://user-images.githubusercontent.com/100170755/235281486-a747e194-5418-44a9-b5e4-e014ef90599d.jpeg)
+![WhatsApp Image 2023-04-29 at 00 28 17](https://user-images.githubusercontent.com/100170755/235281487-b39646bc-8e42-4687-a515-9244ad1b6178.jpeg)
+![WhatsApp Image 2023-04-29 at 00 28 18 (1)](https://user-images.githubusercontent.com/100170755/235281488-89e25e7f-923b-43fe-9f19-9e8607605fa1.jpeg)
+![WhatsApp Image 2023-04-29 at 00 28 18](https://user-images.githubusercontent.com/100170755/235281489-394dcbe1-703b-49f6-9fec-36faaef939d4.jpeg)
+
 
 # Modelo de domínio
 
-*![Dominio](https://user-images.githubusercontent.com/100170755/221247494-563cc0e8-833d-4b1a-9ec8-c051aa13f862.png)*
+![WhatsApp Image 2023-04-29 at 00 29 18](https://user-images.githubusercontent.com/100170755/235281446-819e7882-f16b-4b34-90d0-5f7289c47f4c.jpeg)
+
+
 
 # Decisões de arquitetura
 Este projeto é uma aplicação web que foi feito no front-end com HTML, CSS e JavaScript para criar a interface do usuário e no back-end com Java com SpringBoot framework e arquitetura MVC (Model-View-Controller) para criar a lógica do servidor e interagir com a base de dados, o controlador é implementado em Java com o SpringBoot framework.
