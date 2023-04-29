@@ -58,20 +58,12 @@ Excluir Falta: Permite aos professores ou responsáveis excluir uma falta regist
 *![Dominio](https://user-images.githubusercontent.com/100170755/221247494-563cc0e8-833d-4b1a-9ec8-c051aa13f862.png)*
 
 # Decisões de arquitetura
+Este projeto é uma aplicação web que foi feito no front-end com HTML, CSS e JavaScript para criar a interface do usuário e no back-end com Java com SpringBoot framework e arquitetura MVC (Model-View-Controller) para criar a lógica do servidor e interagir com a base de dados, o controlador é implementado em Java com o SpringBoot framework.
 
-* A arquitetura para o sistema de controle de faltas pode ser a arquitetura em três camadas (apresentação, negócio e dados), na qual a camada de apresentação é responsável pela interface do usuário, a camada de negócio pela lógica de negócio do sistema e a camada de dados pelo armazenamento e recuperação dos dados do sistema.*
+Para enviar as requisições do cliente para o servidor, a aplicação utiliza a Fetch API nativa do JavaScript. Isso permite que a comunicação entre o front-end e o back-end seja realizada de forma assíncrona, sem a necessidade de atualizar a página inteira sempre que uma ação é executada.
 
-Sistema de registro de frequência: o sistema de registro de frequência permite que os professores ou instrutores registrem a presença ou ausência dos alunos em cada aula ou atividade educacional. Isso pode ser feito por meio de um sistema eletrônico de leitura de cartão de presença ou por meio de um sistema de registro manual.
-
-Banco de dados: o banco de dados é onde as informações sobre as faltas dos alunos são armazenadas. Ele pode incluir informações sobre o número de faltas, o tipo de falta (justificada ou não justificada), o motivo da falta, entre outras.
-
-Sistema de notificação: o sistema de notificação pode enviar alertas para os pais ou responsáveis quando um aluno falta à aula ou atividade educacional. Isso pode ajudar a garantir que os pais ou responsáveis tomem medidas adequadas para gerenciar as ausências dos alunos.
-
-Ferramentas de relatórios: as ferramentas de relatórios permitem que os professores ou instrutores gerem relatórios sobre as faltas dos alunos, incluindo informações sobre o número de faltas e padrões de ausência. Esses relatórios podem ser úteis para identificar alunos que precisam de intervenção ou apoio adicional.
-
-
-
-
+Em resumo, este projeto é uma aplicação web que utiliza uma combinação de tecnologias front-end e back-end para criar uma interface de usuário interativa e dinâmica que se comunica com o servidor de forma eficiente e rápida.
+ 
 
 
 ![Arquitetura](https://user-images.githubusercontent.com/100170755/221261944-670d5623-f71a-4bcb-a5b6-f6a427906fce.png)
