@@ -6,7 +6,7 @@
 
 <font size="+12"><center>
 *Sistema LGJV*
-</center></font>
+</center></font> 
 
 
 
