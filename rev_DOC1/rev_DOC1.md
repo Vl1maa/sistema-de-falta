@@ -38,7 +38,8 @@
 
 # Diagrama de casos de uso
 
-![Caso de Uso](https://user-images.githubusercontent.com/100170755/220771904-bcc959ec-b779-464f-bf37-63fad16b0a01.png)*
+![WhatsApp Image 2023-04-28 at 23 38 54](https://user-images.githubusercontent.com/100170755/235280263-f13e4d31-7af0-496f-ba2e-6b08a16c6377.jpeg)
+
 
 # Descrição dos casos de uso
 
