@@ -89,4 +89,23 @@ public class ProfessorController {
             return ResponseEntity.status(response.getStatusCode()).body(response);
         }
     }
+
+    @PostMapping(value = "/professor/{idProfessor}")
+    public ResponseEntity<Response> alterar(@PathVariable Integer idProfessor,
+            @RequestBody NovoProfessorDTO professor) {
+        try {
+            String query = "UPDATE professor SET nome = :nome, id_materia = :idMateria, id_turma = :idTurma WHERE id = :idProfessor;";
+            MapSqlParameterSource params = new MapSqlParameterSource();
+            params.addValue("nome", professor.getNome());
+            params.addValue("idMateria", professor.getIdMateria());
+            params.addValue("idTurma", professor.getIdTurma());
+            params.addValue("idProfessor", idProfessor);
+            jdbcTemplate.update(query, params);
+            Response response = new Response("Professor alterado com sucesso!", HttpStatus.CREATED.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        } catch (Exception e) {
+            Response response = new Response(e.getMessage(), HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        }
+    }
 }

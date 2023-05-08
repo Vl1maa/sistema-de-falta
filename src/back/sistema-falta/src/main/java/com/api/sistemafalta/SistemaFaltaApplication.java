@@ -8,5 +8,4 @@ public class SistemaFaltaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SistemaFaltaApplication.class, args);
 	}
-
 }

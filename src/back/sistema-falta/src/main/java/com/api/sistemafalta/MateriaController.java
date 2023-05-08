@@ -76,4 +76,28 @@ public class MateriaController {
             return ResponseEntity.status(response.getStatusCode()).body(response);
         }
     }
+
+    @GetMapping("/materia/{idMateria}")
+    public ResponseEntity<Response> resgataMateriaPorId(@PathVariable Integer idMateria) {
+        try {
+            String query = "SELECT * FROM materia WHERE id = :idMateria;";
+            MapSqlParameterSource params = new MapSqlParameterSource();
+            params.addValue("idMateria", idMateria);
+            List<Materia> materiasResgatadas = jdbcTemplate.query(query, params, rs -> {
+                List<Materia> materias = new ArrayList<Materia>();
+                while (rs.next()) {
+                    Materia m = new Materia();
+                    m.setId(rs.getInt("id"));
+                    m.setDescricao(rs.getString("descricao"));
+                    materias.add(m);
+                }
+                return materias;
+            });
+            Response response = new Response(materiasResgatadas, HttpStatus.OK.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        } catch (Exception e) {
+            Response response = new Response(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        }
+    }
 }
