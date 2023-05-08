@@ -38,15 +38,15 @@
 
 # Diagrama de casos de uso
 
-![WhatsApp Image 2023-04-28 at 23 38 54](https://user-images.githubusercontent.com/100170755/235280263-f13e4d31-7af0-496f-ba2e-6b08a16c6377.jpeg)
+![Screenshot_1](https://user-images.githubusercontent.com/100170755/236825315-f86e50ce-4894-4c3b-9354-fcb9a7dbfd65.png)
 
 
 # Descrição dos casos de uso
 
-*Registrar Falta: Permite aos professores ou responsáveis registrar faltas de alunos em uma determinada disciplina ou curso.
-Consultar Faltas: Permite aos professores, responsáveis ou alunos visualizar informações sobre as faltas registradas, como datas, motivos e número total de faltas acumuladas.
-Editar Falta: Permite aos professores ou responsáveis editar informações sobre uma falta registrada anteriormente, como a data ou motivo da ausência.
-Excluir Falta: Permite aos professores ou responsáveis excluir uma falta registrada anteriormente.*
+
+![Screenshot_2](https://user-images.githubusercontent.com/100170755/236828181-fb14f054-fbcb-480d-a849-bff25b4d00fa.png) ![image](https://user-images.githubusercontent.com/100170755/236828431-f87a0c4f-4946-43c7-913a-415f2d175c02.png)
+
+
 
 # Protótipos de tela
 
