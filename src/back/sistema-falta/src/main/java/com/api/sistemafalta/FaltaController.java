@@ -77,4 +77,33 @@ public class FaltaController {
         }
     }
 
+    @GetMapping("/falta/")
+    public ResponseEntity<Response> resgataFaltas() {
+        try {
+            String query = "SELECT f.id as id_falta, f.data as data_falta, a.id as id_aluno, a.nome as nome_aluno, m.id as id_materia, m.descricao as descricao_materia FROM falta f INNER JOIN aluno a on (a.id = f.id_aluno) INNER JOIN materia m on (m.id = f.id_materia); ";
+            List<Falta> listaFaltas = jdbcTemplate.query(query, rs -> {
+                List<Falta> faltasResgatadas = new ArrayList<Falta>();
+                while (rs.next()) {
+                    Falta f = new Falta();
+                    Aluno a = new Aluno();
+                    Materia m = new Materia();
+                    f.setId(rs.getInt("id_falta"));
+                    f.setData(rs.getDate("data_falta"));
+                    a.setId(rs.getInt("id_aluno"));
+                    a.setNome(rs.getString("nome_aluno"));
+                    m.setId(rs.getInt("id_materia"));
+                    m.setDescricao(rs.getString("descricao_materia"));
+                    f.setAluno(a);
+                    f.setMateria(m);
+                    faltasResgatadas.add(f);
+                }
+                return faltasResgatadas;
+            });
+            Response response = new Response(listaFaltas, HttpStatus.CREATED.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        } catch (Exception e) {
+            Response response = new Response(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+            return ResponseEntity.status(response.getStatusCode()).body(response);
+        }
+    }
 }
