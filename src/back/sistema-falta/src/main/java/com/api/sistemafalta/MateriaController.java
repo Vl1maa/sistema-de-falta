@@ -28,7 +28,7 @@ public class MateriaController {
     @PostMapping("/materia")
     public ResponseEntity<Response> registraMateria(@RequestBody NovaMateriaDTO materia) {
         try {
-            String query = "INSERT INTO materia (descricao) VALUES (:descricao);";
+            String query = "INSERT INTO gimenez.materia (descricao) VALUES (:descricao);";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("descricao", materia.getDescricao());
             jdbcTemplate.update(query, params);
@@ -43,7 +43,7 @@ public class MateriaController {
     @GetMapping("/materia")
     public ResponseEntity<Response> resgataMateria() {
         try {
-            String query = "SELECT * FROM materia;";
+            String query = "SELECT * FROM gimenez.materia;";
             List<Materia> materiasResgatadas = jdbcTemplate.query(query, rs -> {
                 List<Materia> materias = new ArrayList<Materia>();
                 while (rs.next()) {
@@ -65,7 +65,7 @@ public class MateriaController {
     @DeleteMapping("/materia/{idMateria}")
     public ResponseEntity<Response> deletar(@PathVariable Integer idMateria) {
         try {
-            String query = "DELETE FROM materia WHERE id = :idMateria;";
+            String query = "DELETE FROM gimenez.materia WHERE id = :idMateria;";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("idMateria", idMateria);
             jdbcTemplate.update(query, params);
@@ -80,7 +80,7 @@ public class MateriaController {
     @GetMapping("/materia/{idMateria}")
     public ResponseEntity<Response> resgataMateriaPorId(@PathVariable Integer idMateria) {
         try {
-            String query = "SELECT * FROM materia WHERE id = :idMateria;";
+            String query = "SELECT * FROM gimenez.materia WHERE id = :idMateria;";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("idMateria", idMateria);
             List<Materia> materiasResgatadas = jdbcTemplate.query(query, params, rs -> {

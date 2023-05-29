@@ -31,7 +31,7 @@ public class FaltaController {
     @PostMapping("/falta/registra-falta")
     public ResponseEntity<Response> registraFalta(@RequestBody NovaFaltaDTO falta) {
         try {
-            String query = "INSERT INTO falta (id_aluno, id_materia, data) VALUES (:idAluno, :idMateria, :data);";
+            String query = "INSERT INTO gimenez.falta (id_aluno, id_materia, data) VALUES (:idAluno, :idMateria, :data);";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("data", new Date());
             params.addValue("idAluno", falta.getIdAluno());
@@ -48,7 +48,7 @@ public class FaltaController {
     @GetMapping("/falta/{idAluno}")
     public ResponseEntity<Response> resgataFaltasPorIdAluno(@PathVariable Integer idAluno) {
         try {
-            String query = "SELECT f.id as id_falta, f.data as data_falta, a.id as id_aluno, a.nome as nome_aluno, m.id as id_materia, m.descricao as descricao_materia FROM falta f INNER JOIN aluno a on (a.id = f.id_aluno) INNER JOIN materia m on (m.id = f.id_materia) WHERE a.id = :idAluno;";
+            String query = "SELECT f.id as id_falta, f.data as data_falta, a.id as id_aluno, a.nome as nome_aluno, m.id as id_materia, m.descricao as descricao_materia FROM gimenez.falta f INNER JOIN gimenez.aluno a on (a.id = f.id_aluno) INNER JOIN gimenez.materia m on (m.id = f.id_materia) WHERE a.id = :idAluno;";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("idAluno", idAluno);
             List<Falta> listaFaltas = jdbcTemplate.query(query, params, rs -> {
@@ -80,7 +80,7 @@ public class FaltaController {
     @GetMapping("/falta/")
     public ResponseEntity<Response> resgataFaltas() {
         try {
-            String query = "SELECT f.id as id_falta, f.data as data_falta, a.id as id_aluno, a.nome as nome_aluno, m.id as id_materia, m.descricao as descricao_materia FROM falta f INNER JOIN aluno a on (a.id = f.id_aluno) INNER JOIN materia m on (m.id = f.id_materia); ";
+            String query = "SELECT f.id as id_falta, f.data as data_falta, a.id as id_aluno, a.nome as nome_aluno, m.id as id_materia, m.descricao as descricao_materia FROM gimenez.falta f INNER JOIN gimenez.aluno a on (a.id = f.id_aluno) INNER JOIN gimenez.materia m on (m.id = f.id_materia); ";
             List<Falta> listaFaltas = jdbcTemplate.query(query, rs -> {
                 List<Falta> faltasResgatadas = new ArrayList<Falta>();
                 while (rs.next()) {

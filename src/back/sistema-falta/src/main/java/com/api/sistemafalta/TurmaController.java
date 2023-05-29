@@ -28,7 +28,7 @@ public class TurmaController {
     @PostMapping("/turma")
     public ResponseEntity<Response> registraTurma(@RequestBody NovaTurmaDTO turma) {
         try {
-            String query = "INSERT INTO turma (descricao) VALUES (:descricao);";
+            String query = "INSERT INTO gimenez.turma (descricao) VALUES (:descricao);";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("descricao", turma.getDescricao());
             jdbcTemplate.update(query, params);
@@ -43,7 +43,7 @@ public class TurmaController {
     @GetMapping("/turma")
     public ResponseEntity<Response> lista() {
         try {
-            String query = "SELECT * FROM turma;";
+            String query = "SELECT * FROM gimenez.turma;";
             List<Turma> turmas = jdbcTemplate.query(query, rs -> {
                 List<Turma> turmasResgatadas = new ArrayList<Turma>();
                 while (rs.next()) {
@@ -66,7 +66,7 @@ public class TurmaController {
     @DeleteMapping("/turma/{idTurma}")
     public ResponseEntity<Response> deletar(@PathVariable Integer idTurma) {
         try {
-            String query = "DELETE FROM turma WHERE id = :idTurma;";
+            String query = "DELETE FROM gimenez.turma WHERE id = :idTurma;";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("idTurma", idTurma);
             jdbcTemplate.update(query, params);

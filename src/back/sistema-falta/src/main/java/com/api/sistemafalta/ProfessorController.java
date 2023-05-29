@@ -31,7 +31,7 @@ public class ProfessorController {
     @PostMapping(value = "/professor")
     public ResponseEntity<Response> novo(@RequestBody NovoProfessorDTO professor) {
         try {
-            String query = "INSERT INTO professor (nome, id_materia, id_turma) VALUES (:nome, :idMateria, :idTurma);";
+            String query = "INSERT INTO gimenez.professor (nome, id_materia, id_turma) VALUES (:nome, :idMateria, :idTurma);";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("nome", professor.getNome());
             params.addValue("idMateria", professor.getIdMateria());
@@ -48,7 +48,7 @@ public class ProfessorController {
     @GetMapping("/professor")
     public ResponseEntity<Response> listar() {
         try {
-            String query = "SELECT p.*, m.descricao as materia_descricao, t.descricao as turma_descricao FROM professor p INNER JOIN turma t on (t.id = p.id_turma) INNER JOIN materia m on (m.id = p.id_materia);";
+            String query = "SELECT p.*, m.descricao as materia_descricao, t.descricao as turma_descricao FROM gimenez.professor p INNER JOIN gimenez.turma t on (t.id = p.id_turma) INNER JOIN gimenez.materia m on (m.id = p.id_materia);";
             List<Professor> professoresListados = jdbcTemplate.query(query, rs -> {
                 List<Professor> professores = new ArrayList<Professor>();
                 while (rs.next()) {
@@ -78,7 +78,7 @@ public class ProfessorController {
     @DeleteMapping("/professor/{idProfessor}")
     public ResponseEntity<Response> deletar(@PathVariable Integer idProfessor) {
         try {
-            String query = "DELETE FROM professor WHERE id = :idProfessor;";
+            String query = "DELETE FROM gimenez.professor WHERE id = :idProfessor;";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("idProfessor", idProfessor);
             jdbcTemplate.update(query, params);

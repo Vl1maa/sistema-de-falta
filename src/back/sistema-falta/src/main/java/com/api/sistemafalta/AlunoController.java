@@ -29,7 +29,7 @@ public class AlunoController {
     @PostMapping(value = "/aluno")
     public ResponseEntity<Response> novo(@RequestBody NovoAlunoDTO aluno) {
         try {
-            String query = "INSERT INTO aluno (nome, id_turma, email_responsavel) VALUES (:nome, :idTurma, :emailResponsavel);";
+            String query = "INSERT INTO gimenez.aluno (nome, id_turma, email_responsavel) VALUES (:nome, :idTurma, :emailResponsavel);";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("nome", aluno.getNome());
             params.addValue("idTurma", aluno.getIdTurma());
@@ -46,7 +46,7 @@ public class AlunoController {
     @GetMapping(value = "/aluno")
     public ResponseEntity<Response> lista() {
         try {
-            String query = "SELECT a.*, t.descricao as turma_descricao FROM aluno a INNER JOIN turma t on (t.id = a.id_turma);";
+            String query = "SELECT a.*, t.descricao as turma_descricao FROM gimenez.aluno a INNER JOIN gimenez.turma t on (t.id = a.id_turma);";
             List<Aluno> alunos = jdbcTemplate.query(query, rs -> {
                 List<Aluno> alunosTemp = new ArrayList<Aluno>();
                 while (rs.next()) {
@@ -73,7 +73,7 @@ public class AlunoController {
     @GetMapping(value = "/aluno/{idTurma}")
     public ResponseEntity<Response> listaAlunosPorTurma(@PathVariable Integer idTurma) {
         try {
-            String query = "SELECT a.*, t.descricao as turma_descricao FROM aluno a INNER JOIN turma t on (t.id = a.id_turma) WHERE id_turma = :idTurma;";
+            String query = "SELECT a.*, t.descricao as turma_descricao FROM gimenez.aluno a INNER JOIN gimenez.turma t on (t.id = a.id_turma) WHERE id_turma = :idTurma;";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("idTurma", idTurma);
             List<Aluno> alunos = jdbcTemplate.query(query, params, rs -> {
@@ -102,7 +102,7 @@ public class AlunoController {
     @GetMapping(value = "/aluno/one/{idAluno}")
     public ResponseEntity<Response> resgataPorId(@PathVariable Integer idAluno) {
         try {
-            String query = "SELECT a.*, t.descricao as turma_descricao FROM aluno a INNER JOIN turma t on (t.id = a.id_turma) WHERE a.id = :idAluno;";
+            String query = "SELECT a.*, t.descricao as turma_descricao FROM gimenez.aluno a INNER JOIN gimenez.turma t on (t.id = a.id_turma) WHERE a.id = :idAluno;";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("idAluno", idAluno);
             Aluno aluno = jdbcTemplate.query(query, params, rs -> {
@@ -130,7 +130,7 @@ public class AlunoController {
     @DeleteMapping("/aluno/{idAluno}")
     public ResponseEntity<Response> deletar(@PathVariable Integer idAluno) {
         try {
-            String query = "DELETE FROM aluno WHERE id = :idAluno;";
+            String query = "DELETE FROM gimenez.aluno WHERE id = :idAluno;";
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("idAluno", idAluno);
             jdbcTemplate.update(query, params);
