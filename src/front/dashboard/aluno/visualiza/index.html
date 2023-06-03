@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
     <style>
       * {
         margin: 0;
@@ -66,6 +68,13 @@
       <h2 class="text-2xl font-semibold mb-6">
         Página de visualização do aluno: <span id="span-nome-aluno"></span>
       </h2>
+      <button
+        onclick="gerarRelatorio()"
+        class="py-2 px-6 bg-blue-500 text-white rounded-md"
+      >
+        Gerar Relatório
+      </button>
+
       <h2 class="text-2xl font-semibold mb-6">Faltas:</h2>
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
@@ -103,16 +112,18 @@
     async function resgataAluno() {
       const { body } = await $get("/aluno/one/" + idAluno);
       spanNomeAluno.innerHTML = body.nome;
-      await resgataFaltasAluno();
+    }
+
+    async function retornaFaltasAluno() {
+      const { body } = await $get("/falta/" + idAluno);
+      return body;
     }
 
     async function resgataFaltasAluno() {
-      const { body } = await $get("/falta/" + idAluno);
+      const body = await retornaFaltasAluno();
       for (let falta of body) {
         tableFaltasAluno.innerHTML += `<tr>
-            <td
-              class="px-6 py-4 whitespace-nowrap text-sm"
-            >
+            <td class="px-6 py-4 whitespace-nowrap text-sm">
               ${falta.id}
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -123,10 +134,54 @@
             </td>
           </tr>`;
       }
+      return body; // Retorna as faltas para serem usadas no relatório
+    }
+
+    function gerarRelatorio() {
+      // Resgatar as faltas do aluno
+      retornaFaltasAluno().then((faltas) => {
+        // Criar o conteúdo do relatório
+        const conteudoRelatorio = [];
+        conteudoRelatorio.push({
+          text: "Relatório de Faltas",
+          style: "header",
+        });
+        conteudoRelatorio.push({
+          text: "Aluno: " + spanNomeAluno.innerHTML,
+          style: "subheader",
+        });
+        conteudoRelatorio.push("\n");
+
+        // Adicionar as faltas ao relatório
+        const tabelaFaltas = [];
+        tabelaFaltas.push(["ID", "Matéria", "Data"]);
+        for (let falta of faltas) {
+          tabelaFaltas.push([falta.id, falta.materia.descricao, falta.data]);
+        }
+        conteudoRelatorio.push({
+          table: {
+            body: tabelaFaltas,
+          },
+        });
+
+        // Definir estilos para o relatório
+        const estilos = {
+          header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] },
+          subheader: { fontSize: 14, bold: true, margin: [0, 10, 0, 5] },
+        };
+
+        // Gerar o PDF
+        const documentoPDF = {
+          content: conteudoRelatorio,
+          styles: estilos,
+        };
+        pdfMake.createPdf(documentoPDF).open();
+      });
     }
 
     (async () => {
       await resgataAluno();
+      await resgataFaltasAluno();
     })();
   </script>
 </html>
