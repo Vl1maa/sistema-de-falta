@@ -1,5 +1,5 @@
-// const $baseUrl = "https://api-falta-gimenez.benva.com.br";
-const $baseUrl = "http://localhost:8080";
+const $baseUrl = "https://api-falta-gimenez.benva.com.br";
+// const $baseUrl = "http://localhost:8080";
 
 async function $post(path, data) {
   const response = await fetch($baseUrl + path, {
